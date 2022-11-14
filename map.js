@@ -1,6 +1,6 @@
-function drawMap(world, populationData) {
-    var width = document.getElementById("mainMapChart").offsetWidth,
-        height = 700;
+function drawMap(world, co2EmissionRate) {
+    var width = document.getElementById("mainMapChart").offsetWidth - 100,
+        height = 300;
 
     var svg = d3.select("#mainMapChart")
         .append("svg")
@@ -14,7 +14,7 @@ function drawMap(world, populationData) {
 
     let colors = ["#3D8361" ,"#CFB997" ,"#E14D2A" ,"#61764B" ,"#FD841F"];
     let fillRange = [];
-    let legendWidth = 250;
+    let legendWidth = 180;
     let legendHeight = 20;
     var max = 80;
     var min = -20;
@@ -31,19 +31,48 @@ function drawMap(world, populationData) {
         .scale(130)
         .translate([width / 2, height / 1.5]);
 
-    var path = d3.geoPath().projection(projection);
+    var path = d3.geoPath(projection);
 
-    var features = topojson.feature(world, world.objects.cb_2015_utah_county_20m).features;
+    var features = topojson.feature(world, world.objects.countries).features;
 
-    features.forEach(function (d) {
-        d.details = populationData[d.properties.NAME.replaceAll(" ", "").trim() + "County"] ? populationData[d.properties.NAME.replaceAll(" ", "").trim() + "County"] : {};
+    function findCountry(countryName){
+        co2EmissionRate.forEach(function (d){
+            // console.log(d.Entity + "a")
+            // console.log(countryName + "b")
+            // console.log(d.Entity.trim(), countryName.trim())
+            if(d.Entity.trim() === countryName.trim() && d.Year === "2021" || (d.Entity.trim() === "North America" && countryName.trim() === "United States of America" && d.Year === "2021")){
+                return d
+            }
+        });
+    }
+
+    // console.log(features)
+    // console.log(co2EmissionRate)
+
+    features.forEach(function (feature){
+        // console.log(d.properties.name)
+        var countryName = feature.properties.name;
+        co2EmissionRate.forEach(function (d){
+            // console.log(d.Entity + "a")
+            // console.log(countryName + "b")
+            // console.log(d.Entity.trim(), countryName.trim())
+            if(d.Entity.trim() === countryName.trim() && d.Year === "2021" || (d.Entity.trim() === "North America" && countryName.trim() === "United States of America" && d.Year === "2021")){
+                feature.details = d
+            }
+        });
     });
 
-    features.sort(function (a, b){
-        return a.details.unemploymentRate - b.details.unemploymentRate;
-    });
-
-    console.log(features)
+    var maxCo2Value = 0;
+    var minCo2Value = 1000000000000000000
+    features.forEach(function (d){
+        if(!d.details){
+            d.details = {};
+        }
+        else{
+            maxCo2Value = Math.max(maxCo2Value, d.details["Annual CO2 emissions"]);
+            minCo2Value = Math.min(minCo2Value, d.details["Annual CO2 emissions"]);
+        }
+    })
 
     for(let i = 0;i <= colors.length;i++)
         fillRange.push(legendWidth/colors.length * i);
@@ -56,11 +85,11 @@ function drawMap(world, populationData) {
         LegendScale.push(diff * (i + 1) + min);
 
     var colorScale = d3.scaleLinear()
-        .domain([0,12])
-        .range(["white", "#61764B"]);
+        .domain([0, 20])
+        .range(["#47B5FF", "#3F0071"]);
 
-    for(let idx = 0; idx < features.length;idx++){
-        var color = colorScale(features[idx].details.unemploymentRate);
+    for(let idx = 0; idx < 20;idx++){
+        var color = colorScale(idx);
         colors.push(color);
     }
 
@@ -70,14 +99,14 @@ function drawMap(world, populationData) {
 
     let legendaxis = d3.axisBottom(axisScale).tickFormat(x=>  x.toFixed(1) + "%");
 
-    let legend = svg.selectAll(".legend").data(colors).enter().append("g").attr("transform", "translate(250,810)")
+    let legend = svg.selectAll(".legend").data(colors).enter().append("g").attr("transform", "translate(250,400)")
 
     legend.append("rect").attr("width", legendWidth/colors.length).attr("height", legendHeight).style("fill", d=>d)
         .attr("x", (d,i)=> legendWidth/colors.length * i)
 
 
     svg.append("g").attr("class", "axis")
-        .attr("transform", "translate(250,830)")
+        .attr("transform", "translate(250,420)")
         .call(legendaxis);
 
 
@@ -88,31 +117,36 @@ function drawMap(world, populationData) {
             function (enter) {
                 return enter.append("path")
                     .attr("id", function (d) {
-                        return d.properties.NAME.replaceAll(" ", "");
+                        return d.properties.name;
+                        // console.log(d.properties);
                     })
                     .attr("name", function (d) {
-                        return d.properties.NAME.replaceAll(" ", "");
+                        // return d.properties.NAME.replaceAll(" ", "");
+                        return d.properties.name;
                     })
                     .attr("d", path)
                     .attr("fill", function (d, i) {
-                        return colorScale(d.details.unemploymentRate)
+                        var co2Emission = d.details["Annual CO2 emissions"]? d.details["Annual CO2 emissions"] : 0;
+                        var scaleValue = (20 * co2Emission) / maxCo2Value;
+                        return colorScale(scaleValue)
                     })
                     .style("stroke", "white")
-                    .style("stroke-width", 0.015)
+                    .style("stroke-width", 0.8)
                     .on('mouseover', function (d) {
                         d3.select(this)
-                            .style("stroke", "white")
-                            .style("stroke-width", 0.15)
+                            .style("stroke", "black")
+                            .style("stroke-width", 2)
                             .style("cursor", "pointer")
 
-                        var tempValue = d.srcElement.__data__.properties.NAME.replaceAll(" ", "");
+                        var tempValue = d.srcElement.__data__.properties.name;
                         d3.select("#" + tempValue + "1").transition().duration(100).style("fill", "#FF731D").style("stroke", "black").style("stroke-width", "3");
                     })
                     .on('mouseout', function (d) {
                         d3.select(this)
-                            .style("stroke-width", 0.025)
+                            .style("stroke-width", 0.8)
+                            .style("stroke", "white")
 
-                        var tempValue = d.srcElement.__data__.properties.NAME.replaceAll(" ", "");
+                        var tempValue = d.srcElement.__data__.properties.name;
                         d3.select("#" + tempValue + "1").transition().duration(100).style("fill", "#1e99e7").style("stroke", "#1e99e7");
                     });
             },
