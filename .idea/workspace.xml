@@ -2,13 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c44bfeb-7b17-4f90-ac35-96315a723f8d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lineChart.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/realdonaldtrump.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/COVID-Utah.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/areaChart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/global-co2-fossil-plus-land-use.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stateMap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UT-49-utah-counties.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barChart.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/co2-emission-visualization.html" beforeDir="false" afterPath="$PROJECT_DIR$/co2-emission-visualization.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hw5.css" beforeDir="false" afterPath="$PROJECT_DIR$/hw5.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lineChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/lineChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing.js" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/us-unemployment-rate.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/world-110m.json" beforeDir="false" afterPath="$PROJECT_DIR$/world-110m.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +55,19 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="map.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/map.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.map.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -59,6 +79,12 @@
       <updated>1668120765439</updated>
       <workItem from="1668120766711" duration="11919000" />
       <workItem from="1668390535809" duration="13799000" />
+      <workItem from="1668474209269" duration="22440000" />
+      <workItem from="1668532437928" duration="11104000" />
+      <workItem from="1668727127892" duration="14592000" />
+      <workItem from="1668815862035" duration="4297000" />
+      <workItem from="1668884519807" duration="22212000" />
+      <workItem from="1669155601626" duration="20698000" />
     </task>
     <servers />
   </component>

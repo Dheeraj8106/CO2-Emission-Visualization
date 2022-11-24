@@ -1,5 +1,7 @@
 body {
     font-family: Calibri;
+    height: 100vh;
+    width: 100vw;
 }
 
 .TitleClass {
@@ -20,14 +22,15 @@ body {
 
 .xlabel {
     fill:#aaa;
-    font-size:6pt;
-    text-anchor:middle;
-    opacity: 0.5;
+    font-size: 5pt;
+    opacity: 0.7;
+    text-anchor: start;
 }
 
 .ylabel {
-    font-size: 5.5pt;
-    font-weight: bold;
+    fill: #aaa;
+    font-size: 6pt;
+    opacity: 0.7;
     text-anchor: start;
 }
 
@@ -40,7 +43,7 @@ body {
 }
 
 .map {
-    transform: translate(100.23110954698066px ,167.780881378225px) scale(0.6820739174396874);
+    transform:translate(48.37589287833009px,177.59687801295678px) scale(0.9226044650925118);
 }
 
 .line {
@@ -51,4 +54,34 @@ body {
     font-weight: bold;
     font-size: 1.2rem;
     /*color:#31087B;*/
+}
+
+#mainMapChart{
+    /*height: 50%;*/
+}
+
+#mainAreaChart{
+
+}
+
+#mainLineChart{
+
+}
+
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
 }
