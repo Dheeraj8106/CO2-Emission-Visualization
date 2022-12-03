@@ -94,7 +94,7 @@ let initializeLineChart2 = (finalDataArray, year) => {
         .style("fill", "none")
         .style("stroke", "#FF731D")
         .attr("stroke-width", 2.5)
-        .attr("transform", "translate(40, 40)")
+        .attr("transform", "translate(40, 20)")
         // .on("mouseover", function (d, i) {
         //     d3.select(this).attr("stroke-width", 5)
         //     d3.select(".lines2").attr("opacity", 0.3);
@@ -129,7 +129,7 @@ let initializeLineChart2 = (finalDataArray, year) => {
         .style("fill", "none")
         .style("stroke", "#1746A2")
         .attr("stroke-width", 2.5)
-        .attr("transform", "translate(40, 40)")
+        .attr("transform", "translate(40, 20)")
         // .on("mouseover", function (d, i) {
         //     d3.select(this).attr("stroke-width", 3);
         //     d3.select(".lines1").attr("opacity", 1.5);
@@ -235,14 +235,14 @@ let initializeLineChart2 = (finalDataArray, year) => {
                     d3.select(this).select('text')
                         .text(convertToInternationalCurrencySystem(yScale2.invert(pos.y).toFixed(2)));
 
-                    return "translate(" + (mouse[0]) + "," + (pos.y + 40) +")";
+                    return "translate(" + (mouse[0]) + "," + (pos.y + 20) +")";
                 });
         });
 }
 
 function drawLineChart2(data) {
-    width3 = document.getElementById("mainLineChart2").offsetWidth
-    height3 = document.getElementById("mainLineChart2").offsetHeight + 350;
+    width3 = document.getElementById("mainLineChart2").offsetWidth;
+    height3 = document.getElementById("mainLineChart3").offsetHeight - 30;
 
     xScale2 = getScale([parseTime("1850"), parseTime("2021")], [0, width3 - 50], "scaleTime");
     yScale2 = getScale([0, 9000000000], [height3 - 70, 0], "scaleLinear");
@@ -286,8 +286,8 @@ function drawLineChart2(data) {
         .style("display", "block")
         .style("margin", "auto")
 
-    xAxisGroup2 = draw(xAxis2, "2", `translate(40, ${height3 - 30})`, "xlabel", "scaleTime");
-    yAxisGroup2 = draw(yAxis2, "2", `translate(40,40)`, "ylabel", "scaleLinear");
+    xAxisGroup2 = draw(xAxis2, "2", `translate(40, ${height3 - 50})`, "xlabel", "scaleTime");
+    yAxisGroup2 = draw(yAxis2, "2", `translate(40,20)`, "ylabel", "scaleLinear");
 
     lineG1 = svg2.append("g");
     lineG2 = svg2.append("g");

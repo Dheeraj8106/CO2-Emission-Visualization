@@ -7,6 +7,9 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 <!--    <script data-require="d3@3.5.3" data-semver="3.5.3" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.js"></script>
+    <link href="fontawesome-free-6.2.1-web/css/fontawesome.css" rel="stylesheet">
+    <link href="fontawesome-free-6.2.1-web/css/brands.css" rel="stylesheet">
+    <link href="fontawesome-free-6.2.1-web/css/solid.css" rel="stylesheet">
 
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" rel="stylesheet">
@@ -19,6 +22,7 @@
     <script src="preprocessing.js"></script>
     <script src="lineChart.js"></script>
     <script src="lineChart2.js"></script>
+    <script src="lineChart3.js"></script>
     <script src="areaChart.js"></script>
     <script src="stateMap.js"></script>
 
@@ -26,44 +30,190 @@
 <body>
 <div class="container-fluid">
     <div class="row" style="text-align: center">
-        <div class="col col-lg-4 col-md-12" id="mainMapChart" style="border-right-style: dashed">
-            <span class="headingName" style="font-size: 0.5rem">CO2 Emission Rate by Countries 2021</span>
+        <div class="col col-lg-4 col-md-12" id="mainMapChart">
+            <span class="headingName" style="font-size: 0.6rem">CO2 Emission Rate by Countries 2021</span>
+            <span class="countryName" style="font-size: 0.6rem"></span>
         </div>
 
-        <div class="col col-lg-4 col-md-12" id="mainLineChart" style="border-right-style: dashed">
-            <span class="headingName" style="font-size: 0.5rem">CO2 Emission Rate by Countries(Line Chart)</span>
+        <div class="col col-lg-4 col-md-12" id="mainLineChart3">
+            <span class="headingName" style="font-size: 0.6rem">Change in per capita CO₂ emissions and GDP</span>
+            <span class="countryName" style="font-size: 0.6rem"></span>
+            <button type="button" class="btn btn-outline-primary" style="display: block; margin: 0 50% 0 50%;font-size:0.5rem;" onClick="playFunction('lineChart3')"><i class="fa-brands fa-google-play fa-beat fa-xl"></i></button>
         </div>
 
         <div class="col col-lg-4 col-md-12" id="mainAreaChart">
             <span class="headingName" style="font-size: 0.5rem">Ozone layer depletion vs CO2 Emission Rate</span>
+            <span class="countryName" style="font-size: 0.6rem"></span>
+            <button type="button" class="btn btn-outline-primary" style="display: block; margin: 0 50% 0 50%;font-size:0.5rem;" onClick="playFunction('areaChart')"><i class="fa-brands fa-google-play fa-beat fa-xl"></i></button>
         </div>
     </div>
 
 
     <div class="row" style="text-align: center">
-        <div class="col col-lg-4 col-md-12" id="mainLineChart2" style="border-right-style: dashed">
+        <div class="col col-lg-4 col-md-12" id="mainLineChart2" >
             <span class="headingName" style="font-size: 0.6rem">CO2 emissions from fossil fuels and land use</span>
+            <span class="countryName" style="font-size: 0.6rem"></span>
+            <button type="button" class="btn btn-outline-primary" style="display: block; margin: 0 50% 0 50%;font-size:0.5rem;" onClick="playFunction('lineChart2')"><i class="fa-brands fa-google-play fa-beat fa-xl"></i></button>
         </div>
 
-        <div class="col col-lg-4 col-md-12" style="border-right-style: dashed">
-            <span class="headingName" style="font-size: 0.6rem">Production vs. consumption-based CO₂ emissions and Production vs. consumption-based CO₂ emissions per
-capita </span>
-            <div class="row">
-                <div class="col col-lg-6 col-md-12">
-                </div>
-                <div class="col col-lg-6 col-md-12">
-                </div>
-            </div>
-        </div>
+<!--        <div class="col col-lg-4 col-md-12">-->
+<!--            <span class="headingName" style="font-size: 0.6rem">Production vs. consumption-based CO₂ emissions and Production vs. consumption-based CO₂ emissions per-->
+<!--capita </span>-->
+<!--            <span class="countryName" style="font-size: 0.6rem"></span>-->
+<!--            <div class="row">-->
+<!--                <div class="col col-lg-6 col-md-12">-->
+<!--                </div>-->
+<!--                <div class="col col-lg-6 col-md-12">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <button type="button" class="btn btn-outline-primary" style="display: block; margin: 0 50% 0 50%;font-size:0.5rem;"><i class="fa-brands fa-google-play fa-beat fa-xl"></i></button>-->
+<!--        </div>-->
 
-        <div class="col col-lg-4 col-md-12">
-            <span class="headingName" style="font-size: 0.6rem">Change in per capita CO₂ emissions and GDP</span>
+        <div class="col col-lg-8 col-md-12" id="mainLineChart">
+            <span class="headingName" style="font-size: 0.5rem">CO2 Emission Rate by Countries(Line Chart)</span>
+            <span class="countryName" style="font-size: 0.6rem"></span>
+            <button type="button" class="btn btn-outline-primary" style="display: block; margin: 0 50% 0 50%;font-size:0.5rem;" onClick="playFunction('lineChart')"><i class="fa-brands fa-google-play fa-beat fa-xl"></i></button>
         </div>
     </div>
 
 </div>
 <script>
     fetchingData();
+    function playFunction(chart){
+        console.log(chart)
+        if(chart === "lineChart"){
+            startLineYearLap("lineChart", 50);
+        }
+        else if(chart === "lineChart2"){
+            startLineYearLap("lineChart2", 50);
+        }
+        else if(chart === "lineChart3"){
+            startLineYearLap("lineChart3", 50);
+        }
+        else if(chart === "areaChart"){
+            startLineYearLap("areaChart", 50);
+        }
+        // startLineYearLap("areaChart", 200);
+        // startLineYearLap("lineChart", 100);
+        // startLineYearLap("lineChart2", 100);
+        // startLineYearLap("lineChart3", 300);
+
+        var margin = {top: 10, right: 10, bottom: 100, left: 40},
+            margin2 = {top: 430, right: 10, bottom: 20, left: 40},
+            width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom,
+            height2 = 500 - margin2.top - margin2.bottom;
+
+        var parseDate = d3.time.format("%Y").parse;
+        //%b
+
+
+        var x = d3.time.scale().range([0, width]),
+            x2 = d3.time.scale().range([0, width]),
+            y = d3.scale.linear().range([height, 0]),
+            y2 = d3.scale.linear().range([height2, 0]);
+
+        var xAxis = d3.svg.axis().scale(x).orient("bottom"),
+            xAxis2 = d3.svg.axis().scale(x2).orient("bottom"),
+            yAxis = d3.svg.axis().scale(y).orient("left");
+
+        var brush = d3.svg.brush()
+            .x(x2)
+            .on("brush", brushed);
+
+        var area = d3.svg.area()
+            .interpolate("monotone")
+            .x(function(d) { return x(d.date); })
+            .y0(height)
+            .y1(function(d) { return y(d.caseid); });
+
+        var area2 = d3.svg.area()
+            .interpolate("monotone")
+            .x(function(d) { return x2(d.date); })
+            .y0(height2)
+            .y1(function(d) { return y2(d.caseid); });
+
+        // var lineV = d3.svg.line()
+        //                   .interpolate("monotone")
+        //                   .x(function(d) { return x(d.date); })
+        //                   .y(function(d) { return yV(d.y)});
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom);
+
+        svg.append("defs").append("clipPath")
+            .attr("id", "clip")
+            .append("rect")
+            .attr("width", width)
+            .attr("height", height);
+
+        var focus = svg.append("g")
+            .attr("class", "focus")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var context = svg.append("g")
+            .attr("class", "context")
+            .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+        d3.csv("totaltopics.csv", type, function(error, data) {
+            console.log(data);
+            x.domain(d3.extent(data.map(function(d) { return d.date; })));
+            y.domain([0, d3.max(data.map(function(d) { return d.caseid; }))]);
+            x2.domain(x.domain());
+            y2.domain(y.domain());
+
+            focus.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", area);
+            ///////
+            // focus.append("path")
+            //       .datum(data)
+            //       .attr("class", "area")
+            //       .attr("d", area);
+            //////
+
+            focus.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            focus.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+            context.append("path")
+                .datum(data)
+                .attr("class", "area")
+                .attr("d", area2);
+
+            context.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height2 + ")")
+                .call(xAxis2);
+
+            context.append("g")
+                .attr("class", "x brush")
+                .call(brush)
+                .selectAll("rect")
+                .attr("y", -6)
+                .attr("height", height2 + 7);
+        });
+
+        function brushed() {
+            x.domain(brush.empty() ? x2.domain() : brush.extent());
+            focus.select(".area").attr("d", area);
+            focus.select(".x.axis").call(xAxis);
+        }
+
+        function type(d) {
+            d.date = parseDate(d.date);
+            //d.date = +d.date;
+            d.caseid = +d.caseId;
+            return d;
+        }
+    }
 </script>
 </body>
 </html>

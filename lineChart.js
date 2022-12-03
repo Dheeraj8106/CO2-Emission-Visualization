@@ -1,7 +1,7 @@
 var xScale;
 var yScale;
 const parseTime = d3.timeParse("%Y");
-var line, svg, lineG, circlePlot, xAxis, yAxis, xAxisGroup, yAxisGroup, width1, height1;
+var info3, line, svg, lineG, circlePlot, xAxis, yAxis, xAxisGroup, yAxisGroup, width1, height1;
 
 function convertToInternationalCurrencySystem (labelValue) {
     // Nine Zeroes for Billions
@@ -49,7 +49,7 @@ let initializeLineChart = (finalDataArray, year) => {
                     .attr("class", "lines")
             },
             function (update) {
-                yAxisGroup.transition().duration(150).call(d3.axisLeft(d3.scaleLinear().domain([0, maxDomain]).range([height1 - 70, 0])).tickSize(5).tickPadding(15).tickFormat(function (d) { return d / 1000000000 + ' B'; })).style("stroke-width", "2").attr("class", "ylabel");
+                yAxisGroup.transition().duration(150).call(d3.axisLeft(d3.scaleLinear().domain([0, maxDomain]).range([height1 - 70, 0])).tickSize(5).tickPadding(25).tickFormat(function (d) { return d / 1000000000 + ' B'; })).style("stroke-width", "2").attr("class", "ylabel");
                 yScale = getScale([0, maxDomain], [height1 - 70, 0], "scaleLinear");
 
                 xAxisGroup.transition().duration(150).call(d3.axisBottom(d3.scaleTime().domain([year[0], year[1]]).range([0, width1 - 50])).tickSize(5).tickPadding(15)).style("stroke-width", "2").attr("class", "xlabel");
@@ -64,11 +64,12 @@ let initializeLineChart = (finalDataArray, year) => {
         .style("fill", "none")
         .style("stroke", "#FF731D")
         .attr("stroke-width", 3)
-        .attr("transform", "translate(0, 40)")
+        .attr("transform", "translate(35, 40)")
 
 
     var mouseG = svg.append("g")
-        .attr("class", "mouse-over-effects");
+        .attr("class", "mouse-over-effects")
+        .attr("transform", "translate(35,0)");
 
     mouseG.append("path") // this is the black vertical line to follow mouse
         .attr("class", "mouse-line")
@@ -171,10 +172,10 @@ function drawLineChart(data) {
 
     data.sort(function(a, b){return a.year - b.year})
 
-    width1 = document.getElementById("mainLineChart").offsetWidth
-    height1 = document.getElementById("mainLineChart").offsetHeight;
+    width1 = document.getElementById("mainLineChart").offsetWidth;
+    height1 = document.getElementById("mainLineChart3").offsetHeight;
 
-    xScale = getScale([parseTime("1740"), parseTime("2021")], [0, width1 - 50], "scaleTime");
+    xScale = getScale([parseTime("1749"), parseTime("2020")], [0, width1 - 50], "scaleTime");
     yScale = getScale([0, maxDomain], [height1 - 70, 0], "scaleLinear");
 
     xAxis = d3.axisBottom(xScale)
@@ -216,11 +217,16 @@ function drawLineChart(data) {
         .style("display", "block")
         .style("margin", "auto")
 
-    xAxisGroup = draw(xAxis, "2", `translate(20, ${height1 - 30})`, "xlabel", "scaleTime");
-    yAxisGroup = draw(yAxis, "2", `translate(20,40)`, "ylabel", "scaleLinear");
+    xAxisGroup = draw(xAxis, "2", `translate(35, ${height1 - 30})`, "xlabel", "scaleTime");
+    yAxisGroup = draw(yAxis, "2", `translate(35,40)`, "ylabel", "scaleLinear");
 
     lineG = svg.append("g");
+
+    info3 = svg.append("g");
+    info3.append("line").attr("x1", 50).attr("y1", 30).attr("x2", 90).attr("y2", 30).style("stroke", "#FF731D").style("stroke-width", "3").attr("transform", "translate()");
+    info3.append("text").attr("x", 100).attr("y", 30).text("Carbon dioxide (CO₂) emissions ").style("stroke", "black").style("stroke-width", "0.1").style("font-size", "10px")
+
     circlePlot = svg.append("g");
 
-    initializeLineChart(data, [parseTime("1740"), parseTime("2021")]);
+    initializeLineChart(data, [parseTime("1749"), parseTime("2020")]);
 }

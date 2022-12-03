@@ -1,4 +1,4 @@
-var world, state, co2EmissionData, finalDataArray = [], finalDataArray1 = [], dataDict = {}, dataDict1 = {}, ozoneData, fossilFuelData;
+var world, state, co2EmissionData, finalDataArray = [], finalDataArray1 = [], finalDataArray2 = [], dataDict = {}, dataDict1 = {}, dataDict2 = {}, ozoneData, fossilFuelData, co2GdpPerCapita;
 function fetchingData() {
     d3.json("world-110m.json")
         .then(function (world) {
@@ -6,18 +6,46 @@ function fetchingData() {
                 d3.csv("ozone-depleting-substance-consumption.csv").then(function (ozoneData) {
                     d3.csv("global-co2-fossil-plus-land-use.csv").then(function (fossilFuelData) {
                         d3.json("TX-48-texas-counties.json").then(function (state) {
-                            this.state = state;
-                            this.world = world;
-                            this.co2EmissionData = co2EmissionsRate;
-                            this.ozoneData = ozoneData
-                            this.fossilFuelData = fossilFuelData;
-                            preprocessing(co2EmissionData, world);
+                            d3.csv("co2-emissions-and-gdp-per-capita.csv").then(function (co2GdpPerCapita){
+                                this.co2GdpPerCapita = co2GdpPerCapita;
+                                this.state = state;
+                                this.world = world;
+                                this.co2EmissionData = co2EmissionsRate;
+                                this.ozoneData = ozoneData
+                                this.fossilFuelData = fossilFuelData;
+                                this.co2GdpPerCapita = co2GdpPerCapita;
+                                preprocessing(co2EmissionData, world);
+                            })
                         })
                     });
                 });
             });
         });
 };
+
+function prepareFinalArrayForLineChart3(country){
+    var dataArray1 = [];
+    finalDataArray2 = [];
+
+    if(co2GdpPerCapita){
+        co2GdpPerCapita.forEach(function (d) {
+            if (d.Entity === country) {
+                dataArray1.push(d);
+            }
+        });
+
+        for (let idx = 0; idx < dataArray1.length; idx++) {
+            var year = new Date(dataArray1[idx].Year).getFullYear();
+            dataDict2[year] = [dataArray1[idx]["GDP per capita, PPP (constant 2017 international $)"][0] === ""? 0:dataArray1[idx]["GDP per capita, PPP (constant 2017 international $)"], dataArray1[idx]["Annual CO₂ emissions (per capita)"][0] === ""? 0: dataArray1[idx]["Annual CO₂ emissions (per capita)"], dataArray1[idx]["Annual consumption-based CO₂ emissions (per capita)"][0] === ""? 0:dataArray1[idx]["Annual consumption-based CO₂ emissions (per capita)"]]
+        };
+
+        for (key in dataDict2) {
+            finalDataArray2.push({'key': key, 'value': dataDict2[key]})
+        };
+    }
+
+    return finalDataArray2
+}
 
 function prepareFinalArrayForLineChart2(country){
     var dataArray1 = [];
@@ -100,11 +128,12 @@ function getOzoneData(country){
 
 function preprocessing(co2EmissionsData, world){
     drawMap(world, co2EmissionsData);
-    drawMap1(state);
+    // drawMap1(world, "United States");
     var finalDataArray = prepareFinalArrayForLineChart("United States");
     drawLineChart(finalDataArray);
     drawAreaChart(getOzoneData("United States"));
     drawLineChart2(prepareFinalArrayForLineChart2("United States"));
+    drawLineChart3(prepareFinalArrayForLineChart3("United States"));
 };
 
 function startLineYearLap(chart, time){
@@ -115,6 +144,12 @@ function startLineYearLap(chart, time){
     else if(chart === "areaChart"){
         limit = 24;
     }
+    else if(chart === "lineChart2") {
+        limit = 171;
+    }
+    else if(chart === "lineChart3") {
+        limit = 32;
+    }
 
 
     for (let i=0; i <= limit; i++) {
@@ -124,10 +159,13 @@ function startLineYearLap(chart, time){
     function task(i) {
         setTimeout(function () {
             if(chart === "lineChart"){
-                initializeLineChart(finalDataArray, [parseTime("1740"), parseTime((parseInt("1740") +  i).toString())]);
+                initializeLineChart(finalDataArray, [parseTime("1749"), parseTime((parseInt("1749") +  i).toString())]);
             }
             else if(chart === "lineChart2"){
-                initializeLineChart2(finalDataArray, [parseTime("1740"), parseTime((parseInt("1740") +  i).toString())]);
+                initializeLineChart2(finalDataArray1, [parseTime("1850"), parseTime((parseInt("1850") +  i).toString())]);
+            }
+            else if(chart === "lineChart3"){
+                initializeLineChart3(finalDataArray2, [parseTime("1989"), parseTime((parseInt("1989") +  i).toString())]);
             }
             else if(chart === "areaChart"){
                 initializeAreaChart(getOzoneData("United States"), [parseTime("1989"), parseTime((parseInt("1989") +  i).toString())])
@@ -137,4 +175,6 @@ function startLineYearLap(chart, time){
 }
 
 // startLineYearLap("areaChart", 200);
-// startLineYearLap("lineChart", 10);
+// startLineYearLap("lineChart", 100);
+// startLineYearLap("lineChart2", 100);
+// startLineYearLap("lineChart3", 300);

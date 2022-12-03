@@ -53,21 +53,7 @@ body {
 .headingName{
     font-weight: bold;
     font-size: 1.2rem;
-    /*color:#31087B;*/
 }
-
-#mainMapChart{
-    /*height: 50%;*/
-}
-
-#mainAreaChart{
-
-}
-
-#mainLineChart{
-
-}
-
 
 .axis path,
 .axis line {
@@ -84,4 +70,23 @@ body {
     fill: none;
     stroke: steelblue;
     stroke-width: 1.5px;
+}
+
+.bounding-box rect {
+    fill: none;
+    stroke: #333;
+    stroke-dasharray: 2,1;
+}
+
+.centroid {
+    display: none;
+}
+
+.centroid circle {
+    fill: red;
+}
+
+.ctext{
+    font-weight: bold;
+    font-size: 2rem;
 }
