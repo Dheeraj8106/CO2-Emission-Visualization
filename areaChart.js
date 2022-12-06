@@ -14,7 +14,7 @@ let initializeAreaChart = (finalDataArray1, year) => {
         .x(function (d) {
             return xScale1(parseTime1(d.year));
         })
-        .y0(235)
+        .y0(210)
         .y1(function (d) {
             return yScale1(d.value);
         })
@@ -52,7 +52,7 @@ let initializeAreaChart = (finalDataArray1, year) => {
         )
         .style("fill", "#FEC260")
         .style("stroke", "black")
-        .attr("transform", "translate(20, 15)")
+        .attr("transform", "translate(20, 40)")
         .on("mouseover", function (d, i) {
             d3.select(this).transition().duration(250).attr("stroke-width", 4).style("fill", "#B4CDE6").style("stroke", "#5F9DF7").style("opacity", "0.8");
             d3.selectAll(".pointCircle").transition().duration(500).attr("r", 2)
@@ -65,7 +65,7 @@ let initializeAreaChart = (finalDataArray1, year) => {
 
     var mouseG2 = svg1.append("g")
         .attr("class", "mouse-over-effects2")
-        .attr("transform", "translate(20, 0)");
+        .attr("transform", "translate(20, 20)");
 
     mouseG2.append("path") // this is the black vertical line to follow mouse
         .attr("class", "mouse-line2")
