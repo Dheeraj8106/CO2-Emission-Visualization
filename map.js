@@ -31,14 +31,6 @@ function drawMap(world, co2EmissionRate) {
     var max = 80;
     var min = -20;
 
-    // var zoom = d3.zoom()
-    //     .on("zoom", function () {
-    //         var transform = d3.zoomTransform(this);
-    //         worldMap.attr("transform", transform);
-    //     });
-    //
-    // svg.call(zoom);
-
     var projection = d3.geoMercator()
         .scale(1)
         .translate([0, 0]);
@@ -58,13 +50,6 @@ function drawMap(world, co2EmissionRate) {
 
     var features = ut.features;
 
-    // function findCountry(countryName){
-    //     co2EmissionRate.forEach(function (d){
-    //         if(d.Entity.trim() === countryName.trim() && d.Year === "2021" || (d.Entity.trim() === "North America" && countryName.trim() === "United States of America" && d.Year === "2021")){
-    //             return d
-    //         }
-    //     });
-    // }
 
     features.forEach(function (feature){
         var countryName = feature.properties.name;

@@ -14,21 +14,6 @@ let initializeLineChart3 = (finalDataArray, year) => {
     finalDataArray.sort(function(a, b){return a.year - b.year})
     let yAxisValues = []
 
-    // line = d3.line()
-    //     .x(function (d) {
-    //         return xScale2(parseTime(d.key));
-    //     })
-    //     .y(function (d) {
-    //         return yScale2(d.value[0]);
-    //     });
-
-    // line3 = d3.line()
-    //     .x(function (d) {
-    //         return xScale3(parseTime(d.key));
-    //     })
-    //     .y(function (d) {
-    //         return yScale3(d.value[1]);
-    //     });
 
     line4 = d3.line()
         .x(function (d) {
@@ -47,38 +32,6 @@ let initializeLineChart3 = (finalDataArray, year) => {
             return yScale3(d.value[2]);
         });
 
-    // lineG4.selectAll("path")
-    //     .data([finalDataArray])
-    //     .join(
-    //         function (enter) {
-    //             return enter.append("path")
-    //                 .attr("d", line3)
-    //                 .attr("class", "lines2")
-    //         },
-    //         function (update) {
-    //             yAxisGroup3.transition().duration(150).call(d3.axisLeft(d3.scaleLinear().domain([0, maxDomain]).range([height4 - 70, 0])).tickSize(5).tickPadding(15).tickFormat(function (d) { return d / 1000000000 + ' B'; })).style("stroke-width", "2").attr("class", "ylabel");
-    //             yScale3 = getScale([0, maxDomain], [height4 - 70, 0], "scaleLinear");
-    //
-    //             xAxisGroup3.transition().duration(150).call(d3.axisBottom(d3.scaleTime().domain([year[0], year[1]]).range([0, width4 - 50])).tickSize(5).tickPadding(15)).style("stroke-width", "2").attr("class", "xlabel");
-    //             xScale3 = getScale([year[0], year[1]], [0, width4 - 50], "scaleTime");
-    //
-    //             return update.transition().duration(150).attr("d", line3);
-    //         },
-    //         function (exit) {
-    //             return exit.remove();
-    //         }
-    //     )
-    //     .style("fill", "none")
-    //     .style("stroke", "#FF731D")
-    //     .attr("stroke-width", 3)
-    //     .attr("transform", "translate(20, 40)")
-    //     .on("mouseover", function (d, i) {
-    //         d3.select(this).attr("stroke-width", 3).style("stroke", "#FF731D");
-    //     })
-    //     .on("mouseout", function () {
-    //         d3.select(this).attr("stroke-width", 1).style("stroke", "black");
-    //     });
-    //
     lineG5.selectAll("path")
         .data([finalDataArray])
         .join(

@@ -14,7 +14,7 @@ let initializeAreaChart = (finalDataArray1, year) => {
         .x(function (d) {
             return xScale1(parseTime1(d.year));
         })
-        .y0(260)
+        .y0(415)
         .y1(function (d) {
             return yScale1(d.value);
         })
@@ -158,54 +158,9 @@ let initializeAreaChart = (finalDataArray1, year) => {
                     return "translate(" + (mouse[0]) + "," + (pos.y + 20) + ")";
                 });
         });
-
-
-    // let circlePlot = svg1.append("g").attr("transform", "translate(35, 10)");
-    //
-    // // plot points on graph
-    // for(var idx = 0;idx < finalDataArray1.length; idx++){
-    //     var currX = xScale1(parseTime1(finalDataArray1[idx].year));
-    //     var currY = yScale1(finalDataArray1[idx].value);
-    //     circlePlot.append("circle")
-    //         .attr("cy",  currY)
-    //         .attr("cx", currX)
-    //         .attr("r", 1)
-    //         .attr("class", "pointCircle")
-    //         .on("mouseover", function (d, i) {
-    //             d3.select(this).attr("r", 2);
-    //         })
-    //         .on("mouseout", function () {
-    //             d3.select(this).attr("r", 1);
-    //         });
-    // }
-
 }
 
 function drawAreaChart(data) {
-    // d3.csv("COVID-Utah.csv").then(function(data){
-    //
-    //
-    //     data = data.reverse();
-    //     let finalDataArray1 = [];
-    //
-    //     var idx = 0;
-    //     while(idx < data.length) {
-    //         var maxValue = 0;
-    //         var i = idx;
-    //         var startDate = new Date(data[i].Date);
-    //         while(i < (idx + 7) && i < data.length) {
-    //             maxValue = Math.max(parseInt(data[i]['New cases']), maxValue);
-    //             i++;
-    //         }
-    //         var endDate = new Date(data[i-1].Date);
-    //
-    //         finalDataArray1.push([[startDate,endDate], maxValue]);
-    //         idx = i;
-    //     }
-    //
-    //     var finalMaxDate = finalDataArray1[finalDataArray1.length - 1][0][1];
-    //     var finalMinDate = finalDataArray1[0][0][0];
-
     width2 = document.getElementById("mainAreaChart").offsetWidth;
     height2 = document.getElementById("mainLineChart3").offsetHeight - 80;
 
@@ -247,11 +202,6 @@ function drawAreaChart(data) {
         .attr("height", height2)
         .style("display", "block")
         .style("margin", "auto")
-
-    // add x-axis text
-    // for(let idx = 0; idx < finalDataArray1.length; idx+=1) {
-    //     svg1.append("text").attr("x", 28 + ((idx * 1) * 34.8)).attr("y", height - 90).attr("class", "xlabel").attr("transform", `rotate(30, ${50 + ((idx * 1) * 34.8)}, ${height - 70} )`).text((convertDate(finalDataArray1[idx][0][0]) + " - " + convertDate(finalDataArray1[idx][0][1])));
-    // }
 
     areaG = svg1.append("g");
 

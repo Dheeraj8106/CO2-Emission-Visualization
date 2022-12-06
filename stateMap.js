@@ -66,51 +66,6 @@ function drawMap1(world, country) {
     width = document.getElementById("mainMapChart").offsetWidth / 3;
     height = document.getElementById("mainMapChart").offsetHeight / 3;
 
-    // var svg = d3.select("#mainMapChart")
-    //     .append("svg")
-    //     .style("cursor", "move")
-    //     .style("position", "relative")
-    //     .style("top", "1px")
-    //
-    // svg.attr("viewBox1", "10 5 " + width + " " + (height + 200))
-    //     .attr("preserveAspectRatio", "xMinYMin");
 
     initializeMap(country);
-    // // creating and adding the legend
-    // for(let i = 0;i <= colors.length;i++)
-    //     fillRange.push(legendWidth/colors.length * i);
-    //
-    // let axisScale = d3.scaleQuantile().range(fillRange);
-    //
-    // let diff = (max - min)/colors.length;
-    // let LegendScale = [];
-    // for(let i = 0;i <= colors.length;i++)
-    //     LegendScale.push(diff * (i + 1) + min);
-
-    // // creating a color scale
-    // var colorScale = d3.scaleLinear()
-    //     .domain([0,12])
-    //     .range(["white", "#61764B"]);
-    //
-    // for(let idx = 0; idx < features.length;idx++){
-    //     var color = colorScale(features[idx].details.unemploymentRate);
-    //     colors.push(color);
-    // }
-
-    // colors = colors.slice(5);
-    //
-    // axisScale.domain(LegendScale);
-    //
-    // let legendaxis = d3.axisBottom(axisScale).tickFormat(x=>  x.toFixed(1) + "%");
-    //
-    // let legend = svg.selectAll(".legend").data(colors).enter().append("g").attr("transform", `translate(${width/6},${height + 50})`)
-    //
-    // // adding legend svg to the div
-    // legend.append("rect").attr("width", legendWidth/colors.length).attr("height", legendHeight).style("fill", d=>d)
-    //     .attr("x", (d,i)=> legendWidth/colors.length * i)
-    //
-    // svg.append("g").attr("class", "axis")
-    //     .attr("transform", `translate(${width/6},${height + 70})`)
-    //     .call(legendaxis);
-
 }

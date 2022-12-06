@@ -190,27 +190,3 @@ input[type=range]::-webkit-slider-thumb {
     text-decoration: none;
     font-size: 12px;
 }
-
-/*svg {*/
-/*    font: 10px sans-serif;*/
-/*}*/
-
-/*.area {*/
-/*    fill: #B4B4B4;*/
-/*    opacity: .8;*/
-/*    clip-path: url(#clip);*/
-/*}*/
-
-/*.axis path,*/
-/*.axis line {*/
-/*    fill: none;*/
-/*    stroke: #000;*/
-/*    shape-rendering: crispEdges;*/
-/*}*/
-
-/*.brush .extent {*/
-/*    stroke: black;*/
-/*    fill: white;*/
-/*    fill-opacity: .6;*/
-/*    shape-rendering: crispEdges;*/
-/*}*/

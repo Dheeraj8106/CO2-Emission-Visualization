@@ -98,11 +98,6 @@ function prepareFinalArrayForLineChart(country){
     return finalDataArray;
 }
 
-// function callInitializeLineChart(country){
-//     finalDataArray = prepareFinalArrayForLineChart(country);
-//     initializeLineChart(finalDataArray);
-// }
-
 function getOzoneData(country){
     var tempOzoneData = []
     ozoneData.forEach(function (d){
