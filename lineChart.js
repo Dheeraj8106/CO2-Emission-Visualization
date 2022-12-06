@@ -64,12 +64,12 @@ let initializeLineChart = (finalDataArray, year) => {
         .style("fill", "none")
         .style("stroke", "#FF731D")
         .attr("stroke-width", 3)
-        .attr("transform", "translate(35, 40)")
+        .attr("transform", "translate(35, 0)")
 
 
     var mouseG = svg.append("g")
         .attr("class", "mouse-over-effects")
-        .attr("transform", "translate(35,0)");
+        .attr("transform", "translate(35,-40)");
 
     mouseG.append("path") // this is the black vertical line to follow mouse
         .attr("class", "mouse-line")
@@ -217,8 +217,8 @@ function drawLineChart(data) {
         .style("display", "block")
         .style("margin", "auto")
 
-    xAxisGroup = draw(xAxis, "2", `translate(35, ${height1 - 30})`, "xlabel", "scaleTime");
-    yAxisGroup = draw(yAxis, "2", `translate(35,40)`, "ylabel", "scaleLinear");
+    xAxisGroup = draw(xAxis, "2", `translate(35, ${height1 - 70})`, "xlabel", "scaleTime");
+    yAxisGroup = draw(yAxis, "2", `translate(35,0)`, "ylabel", "scaleLinear");
 
     lineG = svg.append("g");
 

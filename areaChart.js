@@ -14,7 +14,7 @@ let initializeAreaChart = (finalDataArray1, year) => {
         .x(function (d) {
             return xScale1(parseTime1(d.year));
         })
-        .y0(285)
+        .y0(235)
         .y1(function (d) {
             return yScale1(d.value);
         })
@@ -207,7 +207,7 @@ function drawAreaChart(data) {
     //     var finalMinDate = finalDataArray1[0][0][0];
 
     width2 = document.getElementById("mainAreaChart").offsetWidth;
-    height2 = document.getElementById("mainLineChart3").offsetHeight;;
+    height2 = document.getElementById("mainLineChart3").offsetHeight - 130;
 
     xScale1 = getScale([parseTime1("1989"), parseTime1("2013")], [0, width2 - 50], "scaleTime");
     yScale1 = getScale([0, 30000], [height2 - 70, 0], "scaleLinear");

@@ -12,6 +12,7 @@ let initializeLineChart3 = (finalDataArray, year) => {
     })
 
     finalDataArray.sort(function(a, b){return a.year - b.year})
+    let yAxisValues = []
 
     // line = d3.line()
     //     .x(function (d) {
@@ -103,7 +104,7 @@ let initializeLineChart3 = (finalDataArray, year) => {
         .style("fill", "none")
         .style("stroke", "#FF731D")
         .attr("stroke-width", 2.5)
-        .attr("transform", "translate(40, 17)")
+        .attr("transform", "translate(40, 37)")
 
     lineG6.selectAll("path")
         .data([finalDataArray])
@@ -130,12 +131,12 @@ let initializeLineChart3 = (finalDataArray, year) => {
         .style("fill", "none")
         .style("stroke", "#1746A2")
         .attr("stroke-width", 2.5)
-        .attr("transform", "translate(40, 17)")
+        .attr("transform", "translate(40, 37)")
 
 
     var mouseG3 = svg3.append("g")
         .attr("class", "mouse-over-effects3")
-        .attr("transform", "translate(40,0)");
+        .attr("transform", "translate(40,20)");
 
     mouseG3.append("path") // this is the black vertical line to follow mouse
         .attr("class", "mouse-line3")
@@ -234,7 +235,7 @@ let initializeLineChart3 = (finalDataArray, year) => {
 
 function drawLineChart3(data) {
     width4 = document.getElementById("mainLineChart3").offsetWidth;
-    height4 = document.getElementById("mainLineChart3").offsetHeight - 30;
+    height4 = document.getElementById("mainLineChart3").offsetHeight - 130;
 
     xScale3 = getScale([parseTime("1989"), parseTime("2021")], [0, width4 - 50], "scaleTime");
     yScale3 = getScale([0, 9000000000], [height4 - 70, 0], "scaleLinear");
@@ -279,19 +280,19 @@ function drawLineChart3(data) {
         .style("display", "block")
         .style("margin", "auto")
 
-    xAxisGroup3 = draw(xAxis3, "2", `translate(40, ${height4 - 54})`, "xlabel", "scaleTime");
-    yAxisGroup3 = draw(yAxis3, "2", `translate(40,15)`, "ylabel", "scaleLinear");
+    xAxisGroup3 = draw(xAxis3, "2", `translate(40, ${height4 - 34})`, "xlabel", "scaleTime");
+    yAxisGroup3 = draw(yAxis3, "2", `translate(40,35)`, "ylabel", "scaleLinear");
 
     lineG4 = svg3.append("g");
     lineG5 = svg3.append("g");
     lineG6 = svg3.append("g");
     info2 = svg3.append("g").attr("transform", "translate(200,0)");
 
-    info2.append("line").attr("x1",50).attr("y1",10).attr("x2", 90).attr("y2", 10).style("stroke","#FF731D").style("stroke-width", "3").attr("transform", "translate()");
-    info2.append("line").attr("x1",50).attr("y1",30).attr("x2", 90).attr("y2", 30).style("stroke","#1746A2").style("stroke-width", "3").attr("transform", "translate()");
+    info2.append("line").attr("x1",0).attr("y1",10).attr("x2", 35).attr("y2", 10).style("stroke","#FF731D").style("stroke-width", "3").attr("transform", "translate()");
+    info2.append("line").attr("x1",0).attr("y1",30).attr("x2", 35).attr("y2", 30).style("stroke","#1746A2").style("stroke-width", "3").attr("transform", "translate()");
 
-    info2.append("text").attr("x", 100).attr("y", 10).text("Consumption-based CO₂ percapita").style("stroke","black").style("stroke-width", "0.1").style("font-size", "10px")
-    info2.append("text").attr("x", 100).attr("y", 30).text("Production-based CO₂ per capita").style("stroke","black").style("stroke-width", "0.1").style("font-size", "10px")
+    info2.append("text").attr("x", 40).attr("y", 10).text("Per capita").style("stroke","black").style("stroke-width", "0.1").style("font-size", "10px")
+    info2.append("text").attr("x", 40).attr("y", 30).text("GDP").style("stroke","black").style("stroke-width", "0.1").style("font-size", "10px")
 
 
     initializeLineChart3(data, [parseTime("1989"), parseTime("2021")]);

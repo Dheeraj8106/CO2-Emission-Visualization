@@ -134,6 +134,7 @@ function preprocessing(co2EmissionsData, world){
     drawAreaChart(getOzoneData("United States"));
     drawLineChart2(prepareFinalArrayForLineChart2("United States"));
     drawLineChart3(prepareFinalArrayForLineChart3("United States"));
+    // drawLineChart4()
 };
 
 function startLineYearLap(chart, time){
