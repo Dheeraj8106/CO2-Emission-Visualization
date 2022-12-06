@@ -173,7 +173,7 @@ function drawLineChart(data) {
     data.sort(function(a, b){return a.year - b.year})
 
     width1 = document.getElementById("mainLineChart").offsetWidth;
-    height1 = document.getElementById("mainLineChart3").offsetHeight;
+    height1 = document.getElementById("mainLineChart3").offsetHeight - 80;
 
     xScale = getScale([parseTime("1749"), parseTime("2020")], [0, width1 - 50], "scaleTime");
     yScale = getScale([0, maxDomain], [height1 - 70, 0], "scaleLinear");

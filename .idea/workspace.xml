@@ -4,7 +4,9 @@
     <list default="true" id="5c44bfeb-7b17-4f90-ac35-96315a723f8d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/areaChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/areaChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/co2-emission-visualization.html" beforeDir="false" afterPath="$PROJECT_DIR$/co2-emission-visualization.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lineChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/lineChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lineChart2.js" beforeDir="false" afterPath="$PROJECT_DIR$/lineChart2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lineChart3.js" beforeDir="false" afterPath="$PROJECT_DIR$/lineChart3.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +76,7 @@
       <workItem from="1668815862035" duration="4297000" />
       <workItem from="1668884519807" duration="22212000" />
       <workItem from="1669155601626" duration="60935000" />
-      <workItem from="1670024727821" duration="21846000" />
+      <workItem from="1670024727821" duration="22668000" />
     </task>
     <servers />
   </component>

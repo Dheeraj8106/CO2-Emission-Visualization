@@ -235,7 +235,7 @@ let initializeLineChart3 = (finalDataArray, year) => {
 
 function drawLineChart3(data) {
     width4 = document.getElementById("mainLineChart3").offsetWidth;
-    height4 = document.getElementById("mainLineChart3").offsetHeight - 130;
+    height4 = document.getElementById("mainLineChart3").offsetHeight - 80;
 
     xScale3 = getScale([parseTime("1989"), parseTime("2021")], [0, width4 - 50], "scaleTime");
     yScale3 = getScale([0, 9000000000], [height4 - 70, 0], "scaleLinear");
