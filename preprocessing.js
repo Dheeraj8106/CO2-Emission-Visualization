@@ -1,3 +1,4 @@
+//fetching the CSV files.
 var world, state, co2EmissionData, finalDataArray = [], finalDataArray1 = [], finalDataArray2 = [], dataDict = {}, dataDict1 = {}, dataDict2 = {}, ozoneData, fossilFuelData, co2GdpPerCapita;
 function fetchingData() {
     d3.json("dataset/world-110m.json")
