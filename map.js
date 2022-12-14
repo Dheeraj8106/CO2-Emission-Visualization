@@ -1,10 +1,13 @@
+// defining the required variables.
 var svg, worldMap, boundingBox, centroid;
 
+//defining map
 function drawMap(world, co2EmissionRate) {
 
     var width = document.getElementById("mainMapChart").offsetWidth + 500,
         height = document.getElementById("mainMapChart").offsetHeight + 500;
 
+    // SVG
     svg = d3.select("#mainMapChart")
         .append("svg")
         .style("cursor", "move");
@@ -95,6 +98,7 @@ function drawMap(world, co2EmissionRate) {
 
     axisScale.domain(LegendScale);
 
+    // defining legend
     let legendaxis = d3.axisBottom(axisScale).tickFormat(x=>  x.toFixed(1) + "%");
 
     let legend = svg.selectAll(".legend").data(colors).enter().append("g").attr("transform", `translate(${width/2},${height + 100})`)
@@ -110,6 +114,7 @@ function drawMap(world, co2EmissionRate) {
     svg.append("text").attr("class", "ctext");
 
 
+    // interactive mouseover functions
     function handleMouseover(e, d) {
 
         var tempValue = d.properties.name;
