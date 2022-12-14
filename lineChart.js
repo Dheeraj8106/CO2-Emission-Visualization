@@ -1,5 +1,6 @@
 // var xScale;
 // var yScale;
+//defining variables and time parser.
 const parseTime = d3.timeParse("%Y");
 var options1, options2, chart1, chart2;
 // var info3, line, svg, lineG, circlePlot, xAxis, yAxis, xAxisGroup, yAxisGroup, width1, height1, barScale1;
