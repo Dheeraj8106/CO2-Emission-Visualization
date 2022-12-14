@@ -298,7 +298,7 @@ var options1, options2, chart1, chart2;
 //
 //     initializeLineChart(data, [parseTime("1749"), parseTime("2020")]);
 // }
-
+// retrieving the required data
 function initializeLineChart(finalDataArray){
 
     var dataArray = [];
@@ -315,7 +315,7 @@ function initializeLineChart(finalDataArray){
     }])
 
 }
-
+//line chart
 function drawLineChart(finalDataArray){
     // var data = generateDayWiseTimeSeries(new Date("22 Apr 2017").getTime(), 115, {
     //     min: 30,
