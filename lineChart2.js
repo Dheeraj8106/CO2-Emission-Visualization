@@ -2,6 +2,24 @@ var xScale2;
 var yScale2;
 var info1, line, svg2, lineG1, lineG2, lineG3, circlePlot2, circlePlot3, xAxis2, yAxis2, xAxisGroup2, yAxisGroup2, width3, height3;
 
+function convertToInternationalCurrencySystem(labelValue) {
+    // Nine Zeroes for Billions
+    return Math.abs(Number(labelValue)) >= 1.0e+9
+
+        ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
+        // Six Zeroes for Millions
+        : Math.abs(Number(labelValue)) >= 1.0e+6
+
+            ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
+            // Three Zeroes for Thousands
+            : Math.abs(Number(labelValue)) >= 1.0e+3
+
+                ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
+
+                : Math.abs(Number(labelValue));
+
+}
+
 let initializeLineChart2 = (finalDataArray, year) => {
     var maxDomain = 0;
 
@@ -247,11 +265,11 @@ function drawLineChart2(data) {
     xScale2 = getScale([parseTime("1850"), parseTime("2021")], [0, width3 - 50], "scaleTime");
     yScale2 = getScale([0, 9000000000], [height3 - 70, 0], "scaleLinear");
 
-    xAxis2 = d3.axisBottom(xScale)
+    xAxis2 = d3.axisBottom(xScale2)
         .tickSize(5)
         .tickPadding(15)
 
-    yAxis2 = d3.axisLeft(yScale)
+    yAxis2 = d3.axisLeft(yScale2)
         .tickSize(5)
         .tickPadding(15)
         .tickFormat(function (d) {

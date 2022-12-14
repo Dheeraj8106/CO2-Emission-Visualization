@@ -14,7 +14,6 @@ let initializeLineChart3 = (finalDataArray, year) => {
     finalDataArray.sort(function(a, b){return a.year - b.year})
     let yAxisValues = []
 
-
     line4 = d3.line()
         .x(function (d) {
             return xScale3(parseTime(d.key));
@@ -22,7 +21,6 @@ let initializeLineChart3 = (finalDataArray, year) => {
         .y(function (d) {
             return yScale3(d.value[1]);
         });
-
 
     line5 = d3.line()
         .x(function (d) {
@@ -187,9 +185,10 @@ let initializeLineChart3 = (finalDataArray, year) => {
 }
 
 function drawLineChart3(data) {
+    console.log(data)
     width4 = document.getElementById("mainLineChart3").offsetWidth;
     height4 = document.getElementById("mainLineChart3").offsetHeight - 80;
-
+    console.log(height4)
     xScale3 = getScale([parseTime("1989"), parseTime("2021")], [0, width4 - 50], "scaleTime");
     yScale3 = getScale([0, 9000000000], [height4 - 70, 0], "scaleLinear");
 

@@ -153,10 +153,10 @@ function drawMap(world, co2EmissionRate) {
         var finalDataArray = prepareFinalArrayForLineChart(tempValue);
         var finalDataArray1 = prepareFinalArrayForLineChart2(tempValue);
         var finalDataArray2 = prepareFinalArrayForLineChart3(tempValue);
-        initializeLineChart(finalDataArray, [parseTime("1749"), parseTime("2020")]);
         initializeAreaChart(getOzoneData(tempValue), [parseTime1("1989"), parseTime1("2013")])
         initializeLineChart2(finalDataArray1, [parseTime("1850"), parseTime("2021")]);
         initializeLineChart3(finalDataArray2, [parseTime("1989"), parseTime("2021")]);
+        initializeLineChart(finalDataArray);
         // initializeMap(tempValue);
     }
 

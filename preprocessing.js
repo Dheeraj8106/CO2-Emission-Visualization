@@ -1,12 +1,11 @@
 var world, state, co2EmissionData, finalDataArray = [], finalDataArray1 = [], finalDataArray2 = [], dataDict = {}, dataDict1 = {}, dataDict2 = {}, ozoneData, fossilFuelData, co2GdpPerCapita;
 function fetchingData() {
-    d3.json("world-110m.json")
+    d3.json("dataset/world-110m.json")
         .then(function (world) {
-            d3.csv("annual-co2-emissions-per-country.csv").then(function (co2EmissionsRate) {
-                d3.csv("ozone-depleting-substance-consumption.csv").then(function (ozoneData) {
-                    d3.csv("global-co2-fossil-plus-land-use.csv").then(function (fossilFuelData) {
-                        d3.json("TX-48-texas-counties.json").then(function (state) {
-                            d3.csv("co2-emissions-and-gdp-per-capita.csv").then(function (co2GdpPerCapita){
+            d3.csv("dataset/annual-co2-emissions-per-country.csv").then(function (co2EmissionsRate) {
+                d3.csv("dataset/ozone-depleting-substance-consumption.csv").then(function (ozoneData) {
+                    d3.csv("dataset/global-co2-fossil-plus-land-use.csv").then(function (fossilFuelData) {
+                            d3.csv("dataset/co2-emissions-and-gdp-per-capita.csv").then(function (co2GdpPerCapita){
                                 this.co2GdpPerCapita = co2GdpPerCapita;
                                 this.state = state;
                                 this.world = world;
@@ -20,7 +19,6 @@ function fetchingData() {
                     });
                 });
             });
-        });
 };
 
 function prepareFinalArrayForLineChart3(country){
@@ -36,14 +34,14 @@ function prepareFinalArrayForLineChart3(country){
 
         for (let idx = 0; idx < dataArray1.length; idx++) {
             var year = new Date(dataArray1[idx].Year).getFullYear();
-            dataDict2[year] = [dataArray1[idx]["GDP per capita, PPP (constant 2017 international $)"][0] === ""? 0:dataArray1[idx]["GDP per capita, PPP (constant 2017 international $)"], dataArray1[idx]["Annual CO₂ emissions (per capita)"][0] === ""? 0: dataArray1[idx]["Annual CO₂ emissions (per capita)"], dataArray1[idx]["Annual consumption-based CO₂ emissions (per capita)"][0] === ""? 0:dataArray1[idx]["Annual consumption-based CO₂ emissions (per capita)"]]
+            dataDict2[year] = [dataArray1[idx]["GDP per capita"] === ""? 0:dataArray1[idx]["GDP per capita"], dataArray1[idx]["Annual CO2 emissions"] === ""? 0: dataArray1[idx]["Annual CO2 emissions"], dataArray1[idx]["Annual consumption-based CO2 emissions"] === ""? 0:dataArray1[idx]["Annual consumption-based CO2 emissions"]]
         };
 
         for (key in dataDict2) {
             finalDataArray2.push({'key': key, 'value': dataDict2[key]})
         };
     }
-
+    console.log(finalDataArray2)
     return finalDataArray2
 }
 
@@ -102,18 +100,18 @@ function getOzoneData(country){
     var tempOzoneData = []
     ozoneData.forEach(function (d){
         if(d["Entity"] === country){
-            if(d["Consumption of Ozone-Depleting Substances - Methyl Chloroform"][0] === "-"){
+            if(d["Consumption of Ozone-Depleting Substances - Chlorofluorocarbons (CFCs)"][0] === "-"){
                 tempOzoneData.push({
                     name: d["Entity"],
                     year: d["Year"],
-                    value: d["Consumption of Ozone-Depleting Substances - Methyl Chloroform"].slice(1)
+                    value: d["Consumption of Ozone-Depleting Substances - Chlorofluorocarbons (CFCs)"].slice(1)
                 });
             }
             else {
                 tempOzoneData.push({
                     name: d["Entity"],
                     year: d["Year"],
-                    value: d["Consumption of Ozone-Depleting Substances - Methyl Chloroform"] != "" ? d["Consumption of Ozone-Depleting Substances - Methyl Chloroform"]: "0"
+                    value: d["Consumption of Ozone-Depleting Substances - Chlorofluorocarbons (CFCs)"] != "" ? d["Consumption of Ozone-Depleting Substances - Chlorofluorocarbons (CFCs)"]: "0"
                 });
             }
         }
@@ -125,10 +123,10 @@ function preprocessing(co2EmissionsData, world){
     drawMap(world, co2EmissionsData);
     // drawMap1(world, "United States");
     var finalDataArray = prepareFinalArrayForLineChart("United States");
+    drawLineChart3(prepareFinalArrayForLineChart3("United States"));
     drawLineChart(finalDataArray);
     drawAreaChart(getOzoneData("United States"));
     drawLineChart2(prepareFinalArrayForLineChart2("United States"));
-    drawLineChart3(prepareFinalArrayForLineChart3("United States"));
     // drawLineChart4()
 };
 
@@ -138,13 +136,13 @@ function startLineYearLap(chart, time){
         limit = 281;
     }
     else if(chart === "areaChart"){
-        limit = 24;
+        limit = 90;
     }
     else if(chart === "lineChart2") {
         limit = 171;
     }
     else if(chart === "lineChart3") {
-        limit = 32;
+        limit = 90;
     }
 
 

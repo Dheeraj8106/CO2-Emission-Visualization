@@ -30,6 +30,8 @@
     <script src="areaChart.js"></script>
     <script src="tempChart.js"></script>
     <script src="stateMap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
@@ -37,7 +39,7 @@
 <body>
 <div class="container-fluid">
     <div class="row" style="text-align: center">
-        <div class="col col-lg-6 col-md-12" id="mainMapChart">
+        <div class="col col-lg-5 col-md-12" id="mainMapChart">
             <span class="headingName" style="font-size: 0.5rem">CO2 Emission Rate by Countries 2021</span>
             <span class="countryName" style="font-size: 0.6rem"></span>
         </div>
@@ -50,18 +52,20 @@
                 <i class="fa-brands fa-google-play fa-beat fa-xl"></i></button>
         </div>
 
-        <div class="col col-lg-3 col-md-12" id="mainAreaChart">
+        <div class="col col-lg-4 col-md-12" id="mainAreaChart">
             <span class="headingName" style="font-size: 0.5rem">Ozone layer depletion vs CO2 Emission Rate</span>
             <span class="countryName" style="font-size: 0.6rem"></span>
             <button type="button" class="btn btn-outline-primary"
                     style="display: block; margin: 0 50% 0 50%;font-size:0.5rem;" onClick="playFunction('areaChart')"><i
                     class="fa-brands fa-google-play fa-beat fa-xl"></i></button>
+            <div id="barAndLineChart">
+            </div>
         </div>
     </div>
 
 
     <div class="row" style="text-align: center">
-        <div class="col col-lg-4 col-md-12" id="mainLineChart2">
+        <div class="col col-lg-5 col-md-12" id="mainLineChart2">
             <span class="headingName" style="font-size: 0.5rem">CO2 emissions from fossil fuels and land use</span>
             <span class="countryName" style="font-size: 0.6rem"></span>
             <button type="button" class="btn btn-outline-primary"
@@ -70,12 +74,17 @@
             </button>
         </div>
 
-        <div class="col col-lg-8 col-md-12" id="mainLineChart">
+        <div class="col col-lg-7 col-md-12" id="mainLineChart">
             <span class="headingName" style="font-size: 0.5rem">CO2 Emission Rate by Countries(Line Chart)</span>
             <span class="countryName" style="font-size: 0.6rem"></span>
-            <button type="button" class="btn btn-outline-primary"
-                    style="display: block; margin: 0 50% 0 50%;font-size:0.5rem;" onClick="playFunction('lineChart')"><i
-                    class="fa-brands fa-google-play fa-beat fa-xl"></i></button>
+            <div id="wrapper">
+                <div id="chart-area">
+
+                </div>
+                <div id="chart-bar">
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -92,12 +101,8 @@
         } else if (chart === "areaChart") {
             startLineYearLap("areaChart", 50);
         }
-
-        // startLineYearLap("areaChart", 200);
-        // startLineYearLap("lineChart", 100);
-        // startLineYearLap("lineChart2", 100);
-        // startLineYearLap("lineChart3", 300);
     }
+
 </script>
 </body>
 </html>
